@@ -18,6 +18,3 @@ module.exports = function dateSample(sampleActivity) {
   //throw new CustomError('Not implemented');
   // remove line with error and write your code here
 };
-
-// res = dateSample('9000')
-// res = dateSample('15.1')
