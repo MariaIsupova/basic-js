@@ -42,6 +42,7 @@ module.exports = function repeater(str, options) {
   return res
 };
 
+
 // repeater(true, { repeatTimes: 3, separator: '??? ', addition: false, additionRepeatTimes: 2, additionSeparator: '!!!' })
 
 // repeater('my test string', { repeatTimes: 5, separator: '?!', addition: 'PLUS', additionRepeatTimes: 4, additionSeparator: '))' })
