@@ -1,67 +1,47 @@
 const CustomError = require("../extensions/custom-error");
 
 const chainMaker = {
-  // chain: '',
+  chain: [],
+
   getLength() {
-    // throw new CustomError('Not implemented');
-    // remove line with error and write your code here
-    console.log('length start')
-    var count = 0
-    this.chain.forEach(element => {
-      if (element === '(') {
-        count++
-      }
-    }); 
-    console.log('length=',count)
-    return count
+    return this.chain.length
   },
+
   addLink(value) {
-    // throw new CustomError('Not implemented');
-    // remove line with error and write your code here
-    console.log('add start')
-    if (this.chain === '') {
-      this.chain = `(${value})`
-    } else {
-      this.chain += `~~(${value})`
-    }
-    console.log('add', this.chain)
-    // return this.chain
+    this.chain.push(value);
+    return chainMaker;
   },
+
   removeLink(position) {
-    // throw new CustomError('Not implemented');
-    // remove line with error and write your code here
-    var count = 0
-    var start = -1
-    for (i = 0; i < this.chain.length; i++) {
-      if (this.chain[i] === '(') {
-        count++
-        if (position === count) {
-          star = i
-        }
-      }
-      if (this.chain[i] === ')' && position === count) {
-        var end = i
-        break;
-      }
+    if (position > this.chain.length || !position instanceof Number || position === 0) {
+      this.chain = []
+      throw 'Error';
     }
-    if (star === -1) {
-      throw new CustomError('Not implemented');
-    }
-    console.log('remove from', start, 'to', end)
-    this.chain = this.chain.replace(this.chain.substring(start, end), "")
-    console.log('remove', this.chain)
+    this.chain.splice(position - 1, 1)
+    return chainMaker
   },
+
   reverseChain() {
-    // throw new CustomError('Not implemented');
-    // remove line with error and write your code here
-    this.chain.split("").reverse().join("")
-    console.log('reverse', this.chain)
+    this.chain = this.chain.reverse();
+    return chainMaker
   },
   finishChain() {
-    // throw new CustomError('Not implemented');
-    // remove line with error and write your code here
-    // return this.chain
-    this.chain = ''
+    if (this.chain.length === 0) {
+      throw 'Error';
+    }
+    if (this.chain.length === 1 || this.chain.length < 2) {
+      this.chain[0] = '( ' + this.chain[0] + ' )'
+    }
+    if (this.chain.length > 1) {
+      this.chain[0] = '( ' + this.chain[0] + ' )'
+      for (let i = 1; i < this.chain.length; i++) {
+        this.chain[i] = '~~( ' + this.chain[i] + ' )'
+      }
+
+    }
+    let res = this.chain.join('')
+    this.chain = []
+    return res
   }
 };
 

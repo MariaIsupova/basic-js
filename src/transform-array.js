@@ -35,6 +35,8 @@ module.exports =function transform(arr) {
     }
     return res
   }
-  throw new CustomError('Not implemented');
+  else{
+    throw new CustomError('Not implemented');
+  }
 
 };
